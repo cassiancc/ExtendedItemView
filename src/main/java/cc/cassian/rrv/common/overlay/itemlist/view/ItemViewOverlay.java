@@ -185,7 +185,7 @@ public class ItemViewOverlay extends AbstractRrvItemListOverlay {
      */
     private void updateQuery(String newQuery) {
         slotUpdaters += 1;
-        Util.backgroundExecutor().execute(() -> {
+        RrvUtil.execute(() -> {
             if (!newQuery.equals(this.currentQuery))
                 this.startIndex = 0;
 
@@ -227,7 +227,7 @@ public class ItemViewOverlay extends AbstractRrvItemListOverlay {
 
     public void updateDisplayedItems() {
         slotUpdaters += 1;
-        Util.backgroundExecutor().execute(()->{
+        RrvUtil.execute(()->{
             List<ItemStack> items = this.filteredItems;
             if (Configs.STACK_GROUPS.areStackGroupsEnabled()) {
                 boolean isSearching = isSearchingStackGroups();

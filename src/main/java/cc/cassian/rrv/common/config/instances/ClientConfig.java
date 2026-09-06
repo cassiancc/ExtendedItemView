@@ -44,6 +44,7 @@ public class ClientConfig extends AbstractRrvConfig {
 	private Map<PrefixedFilter, PrefixedFilter.Configuration> searchFilters = PrefixedFilter.DEFAULT;
 	private boolean showExclusionAreas = false;
 	private boolean searchTooltips = true;
+	private boolean updateOnBackgroundThread = false;
 
 	public ClientConfig() {
 		super("client_settings");
@@ -349,6 +350,7 @@ public class ClientConfig extends AbstractRrvConfig {
 		}
 		this.showExclusionAreas = load("development", "show_exclusion_areas", this.showExclusionAreas);
 		this.searchTooltips = load("advanced", "search_tooltips", this.searchTooltips);
+		this.updateOnBackgroundThread = load("advanced", "update_on_background_thread", this.updateOnBackgroundThread);
 
 		if (loadedDeprecatedConfig) {
 			ReliableRecipeViewer.LOGGER.info("Upgraded config file from v8.6 to v8.7.");
@@ -388,6 +390,7 @@ public class ClientConfig extends AbstractRrvConfig {
 		}
 		save("development", "show_exclusion_areas", this.showExclusionAreas);
 		save("advanced", "search_tooltips", this.searchTooltips);
+		save("advanced", "update_on_background_thread", this.updateOnBackgroundThread);
 
 		// remove deprecated config fields from v8.6.x and below
 		remove("enabled");
@@ -410,5 +413,13 @@ public class ClientConfig extends AbstractRrvConfig {
 		remove("workstationDisplay");
 		remove("recipeSharing");
 		remove("indexSource");
+	}
+
+	public boolean isUpdateOnBackgroundThread() {
+		return updateOnBackgroundThread;
+	}
+
+	public void setUpdateOnBackgroundThread(boolean updateOnBackgroundThread) {
+		this.updateOnBackgroundThread = updateOnBackgroundThread;
 	}
 }

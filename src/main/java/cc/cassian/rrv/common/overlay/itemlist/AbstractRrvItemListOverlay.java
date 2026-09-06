@@ -8,6 +8,7 @@ import cc.cassian.rrv.common.overlay.ItemSlot;
 import cc.cassian.rrv.common.overlay.itemlist.panel.SidePanelOverlay;
 import cc.cassian.rrv.common.overlay.itemlist.view.ItemViewOverlay;
 import cc.cassian.rrv.common.overlay.itemlist.view.ReliableSpriteIconButton;
+import cc.cassian.rrv.common.recipe.util.RrvUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -153,7 +154,7 @@ public abstract class AbstractRrvItemListOverlay extends AbstractRrvOverlay {
             this.lastItemSlots().clear();
             this.lastItemSlots().addAll(this.itemSlots());
         });
-        Util.backgroundExecutor().execute(()->{
+        RrvUtil.execute(()->{
             this.itemSlots().clear();
 
             int currentStackPos = this.startIndex;

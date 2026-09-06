@@ -3,6 +3,7 @@ package cc.cassian.rrv.common.recipe.util;
 import cc.cassian.rrv.api.ReliableRecipeViewerPlugin;
 import cc.cassian.rrv.client.util.RRVClientUtil;
 import cc.cassian.rrv.common.ReliableRecipeViewer;
+import cc.cassian.rrv.common.config.Configs;
 import cc.cassian.rrv.common.mixin.world.item.crafting.IngredientAccessor;
 import cc.cassian.rrv.client.recipe.ClientRecipeManager;
 import cc.cassian.rrv.common.mixin.world.level.storage.loot.LootPoolAccessor;
@@ -38,6 +39,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Util;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -445,4 +447,11 @@ public class RrvUtil {
     }
 
 
+	public static void execute(Runnable o) {
+        if (Configs.CLIENT_SETTINGS.isUpdateOnBackgroundThread()) {
+            Util.backgroundExecutor().execute(o);
+        } else {
+            o.run();
+        }
+	}
 }
